@@ -22,20 +22,15 @@ for i in range(12,21):
 	for a in html.find_all('table'):
 		par = []
 		for b in a.find_all('tr'):
-			arr = []
-			for c in b.find_all('td'):
-				arr.append(nor(c.text))
+			arr = [nor(c.text) for c in b.find_all('td')]
 			if len(arr) > 1:
 				par.append((arr[0],arr[1]))
-		nex = [0 for i in range(5)]
-		pre = 0
-		tot = 0
+		nex = [0 for _ in range(5)]
 		new = []
+		pre = 0
 		for a in par:
 			# print(a)
 			rem = int(a[0])-i-2000
-			# print(rem)
-			tot += 1
 			if a in past:
 				pre += 1
 			else:

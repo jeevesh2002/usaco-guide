@@ -84,7 +84,7 @@ def usaco_stats():
                 "_platinum_results.html"
             soup = parse(url)
             print(month[j]+" "+str(a+offset[j])+": ")
-            if soup == None:
+            if soup is None:
                 print("NO DATA")
             else:
                 usaco_parse(soup)

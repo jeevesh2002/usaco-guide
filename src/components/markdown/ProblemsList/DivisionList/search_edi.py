@@ -14,22 +14,16 @@ def parse(url):
 f = open('id_to_sol.json','r')
 data = json.load(f) 
 
+pref = "http://www.usaco.org/current/data/" # prefix for each url
 # print(data)
 
 for _ in data:
-	pref = "http://www.usaco.org/current/data/" # prefix for each url
 	e = pref+data[_]
-	if not ("bronze" in e) or e.endswith("bronze.html"):
+	if "bronze" not in e or e.endswith("bronze.html"):
 		continue
 	p = parse(e)
 	text = str(p)
-	# print(text.count("Possibility"))
-	# print("--------")
-	# pprint.pprint(p.text)
-
-	yes = False
-	if text.lower().count('recur'):
-		yes = True
+	yes = bool(text.lower().count('recur'))
 	# if text.lower().count('pair'):
 	# 	yes = True
 	# for code in p.find_all('pre', ['prettyprint']):

@@ -5,10 +5,7 @@ import os
 # 	template = "".join(f.readlines())
 
 def fraction_div(spaces,num):
-	ans = 0
-	for x in spaces:
-		if x%num == 0:
-			ans += 1
+	ans = sum(x%num == 0 for x in spaces)
 	return ans/len(spaces)
 
 def replace_prefix(line,num_spaces):

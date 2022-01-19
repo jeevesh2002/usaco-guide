@@ -21,17 +21,14 @@ for root,dirs,files in os.walk("."):
 				for x in data.values():
 					if isinstance(x,list):
 						for y in x:
-							if isinstance(y,dict):
-								if 'tags' in y and isinstance(y['tags'],list):
-									for z in y['tags']:
-										oc[z] += 1
-										if z == '':
-											print("BLANK TAG",name)
+							if isinstance(y, dict) and 'tags' in y and isinstance(y['tags'], list):
+								for z in y['tags']:
+									oc[z] += 1
+									if z == '':
+										print("BLANK TAG",name)
 
 
-distinct_tags=[]
-for tag,occurrences in oc.items():
-	distinct_tags.append((occurrences,tag))
+distinct_tags = [(occurrences,tag) for tag,occurrences in oc.items()]
 distinct_tags.sort(reverse=True)
 for z in distinct_tags:
 	print(z)
