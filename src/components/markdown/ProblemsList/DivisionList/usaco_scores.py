@@ -13,10 +13,7 @@ def parse(url: str):
 
 
 def usaco_parse(is_plat: bool, html):
-    # print(html.prettify())
-    table_number = 0
-    for a in html.find_all('table'):  # based off pre-college results
-        table_number += 1
+    for table_number, a in enumerate(html.find_all('table'), start=1):  # based off pre-college results
         fst = True
         lens = []
         names = []
@@ -33,17 +30,15 @@ def usaco_parse(is_plat: bool, html):
                 totScore = [0]*num_probs
                 perfect = [0]*num_probs
             else:
-                arr = []
-                for c in b.find_all('tr'):
-                    arr.append(c.text)
+                arr = [c.text for c in b.find_all('tr')]
                 for c in b.find_all('td'):
                     arr.append(c.text)
-                if len(arr) == 0:
+                if not arr:
                     continue
                 st = 5
                 score = [0, 0, 0]
                 for i, t in enumerate(lens):
-                    for j in range(t):
+                    for _ in range(t):
                         if arr[st] == '*':
                             score[i] += 1
                         st += 1
@@ -74,11 +69,11 @@ def usaco_parse(is_plat: bool, html):
                 print("INCOMPLETE DATA")
             return totScore
 
-        # def ro(x):
-        # 	return str(round(1000*x)/10)+"%"
-        # for i in range(3): # ro(relScore[i]),perfect[i]
-        # 	print(names[i],ro(totScore[i]))
-        # break
+            # def ro(x):
+            # 	return str(round(1000*x)/10)+"%"
+            # for i in range(3): # ro(relScore[i]),perfect[i]
+            # 	print(names[i],ro(totScore[i]))
+            # break
     return None
 
 

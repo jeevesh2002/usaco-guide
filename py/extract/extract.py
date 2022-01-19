@@ -30,11 +30,8 @@ for y in x:
 			done[p["id"]] = y["frontmatter"]["id"]
 			# print(p["id"], p["source"], y["frontmatter"]["id"])
 
-notDone = {}
-
 des = ["bronze", "silver", "gold", "plat"]
-for t in des:
-	notDone[t] = []
+notDone = {t: [] for t in des}
 
 def division(x):
 	for t in des:

@@ -12,7 +12,7 @@ res2 = {}
 
 last_page = toc_end
 
-for page in range(toc_end, pdfFile.numPages):
+for page in range(last_page, pdfFile.numPages):
 	text = pdfFile.getPage(page).extractText()
 	if page == 6:
 		print(text)
@@ -21,19 +21,19 @@ for page in range(toc_end, pdfFile.numPages):
 		if chapter % 1 == 0:
 			chapter = int(chapter)
 			for line in text.split('\n'):
-				if str.startswith(line, f'Chapter{chapter}') and abs(last_page - page) < 10:
-					if not chapter in res:
-						res[chapter] = page + 1 # handle offset
-						res2[str(chapter)] = page + 1
-						last_page = page
-						print("Chapter:", chapter)
+				if (str.startswith(line, f'Chapter{chapter}')
+				    and abs(last_page - page) < 10 and chapter not in res):
+					res[chapter] = page + 1 # handle offset
+					res2[str(chapter)] = page + 1
+					last_page = page
+					print("Chapter:", chapter)
 		else: 
 			for line in text.split('\n'):
-				if str.startswith(line, str(chapter)) and abs(last_page - page) < 10:
-					if not chapter in res:
-						res[chapter] = page + 1 # handle offset
-						res2[str(chapter)] = page + 1
-						last_page = page
-						print("Chapter:", chapter)
+				if (str.startswith(line, str(chapter)) and abs(last_page - page) < 10
+				    and chapter not in res):
+					res[chapter] = page + 1 # handle offset
+					res2[str(chapter)] = page + 1
+					last_page = page
+					print("Chapter:", chapter)
 
 print(res2)
